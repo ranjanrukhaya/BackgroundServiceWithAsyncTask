@@ -3,6 +3,7 @@ package com.gaura.learn.backgroundservicewithasyncsample
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import java.lang.Exception
 
 class MyIntentService : IntentService("MyIntentThread") {
@@ -29,6 +30,10 @@ class MyIntentService : IntentService("MyIntentThread") {
             }
             index++
         }
+
+        val localIntent = Intent("my.own.broadcast")
+        localIntent.putExtra("key", index)
+        LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent)
     }
 
     override fun onDestroy() {
