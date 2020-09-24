@@ -18,6 +18,7 @@
         </activity>
 
         <service android:name=".MyBackgroundService" />
+        <service android:name=".MyIntentService" />
     </application>
 
 </manifest>

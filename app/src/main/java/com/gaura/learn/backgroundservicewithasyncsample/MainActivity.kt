@@ -18,4 +18,8 @@ class MainActivity : AppCompatActivity() {
     fun onStopService(view: View) {
         stopService(Intent(this, MyBackgroundService::class.java))
     }
+
+    fun onStartIntentService(view: View) {
+        startService(Intent(this, MyIntentService::class.java))
+    }
 }
