@@ -3,6 +3,7 @@ package com.gaura.learn.backgroundservicewithasyncsample
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import java.lang.Exception
 
@@ -14,14 +15,16 @@ class MyIntentService : IntentService("MyIntentThread") {
 
     override fun onCreate() {
         Log.d(TAG, "onCreate, ThreadName : " + Thread.currentThread().name)
+        Toast.makeText(this, "Intent Service Started", Toast.LENGTH_SHORT).show()
         super.onCreate()
     }
 
     override fun onHandleIntent(intent: Intent?) {
         Log.d(TAG, "onHandleIntent, ThreadName : " + Thread.currentThread().name)
 
+        val duration = intent!!.getIntExtra("intentParam", -1)
         var index = 1
-        while (index <= 12) {
+        while (index <= duration) {
             Log.d(TAG, "Time passed: $index secs")
             try {
                 Thread.sleep(1000)
@@ -37,7 +40,8 @@ class MyIntentService : IntentService("MyIntentThread") {
     }
 
     override fun onDestroy() {
-        Log.d(TAG, "onDestroy, ThreadName : " + Thread.currentThread().name)
         super.onDestroy()
+        Log.d(TAG, "onDestroy, ThreadName : " + Thread.currentThread().name)
+        Toast.makeText(this, "Intent Service Finished", Toast.LENGTH_SHORT).show()
     }
 }

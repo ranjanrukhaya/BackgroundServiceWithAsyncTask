@@ -25,13 +25,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onStartIntentService(view: View) {
-        startService(Intent(this, MyIntentService::class.java))
+        val intent = Intent(this, MyIntentService::class.java)
+        intent.putExtra("intentParam", 12)
+        startService(intent)
     }
 
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("my.own.broadcast")
-        LocalBroadcastManager.getInstance(this).registerReceiver(localBroadcastReceiver, intentFilter)
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(localBroadcastReceiver, intentFilter)
     }
 
     override fun onDestroy() {
