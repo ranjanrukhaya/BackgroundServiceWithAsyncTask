@@ -48,4 +48,10 @@ class MainActivity : AppCompatActivity() {
             result_text.text = "Intent Service ran for $result secs"
         }
     }
+
+    fun onStartJobIntentService(view: View) {
+        val intent = Intent(this, MyJobIntentService::class.java)
+        intent.putExtra("intentParam", 12)
+        MyJobIntentService.enqueueWork(this, intent)
+    }
 }
